@@ -27,23 +27,24 @@ namespace Assignment_2
             {
                 try
                 {
+                    // create the variables that will be used
                     int[] nums = { 1, 3, 5, 6 };
                     int target = 5;
-                    var res = nums.Length;
+                    var res = nums.Length; //var res takes the complete length of nums
                     var x = 0;
-                    var y = nums.Length - 1;
+                    var y = nums.Length - 1; //use nums at full length with an index
 
-                    while (x <= y)
+                    while (x <= y) //start while loop
                     {
                         var m = x + (y - x) / 2;
                         var item = nums[m];
 
-                        if (item == target)
+                        if (item == target) //start if else loop
                         {
                             res = m;
-                            break;
+                            break; //terminate loop if successful 
                         }
-                        else if (item < target)
+                        else if (item < target) //continue loop if not
                         {
                             x = m + 1;
                         }
@@ -53,7 +54,7 @@ namespace Assignment_2
                             res = m;
                         }
                     }
-                         Console.WriteLine(res);
+                         Console.WriteLine(res); //write result
                     return -1;
                 }
                 catch (Exception)
@@ -117,10 +118,11 @@ namespace Assignment_2
             {
                 try
                 {
+                    //Set the variables 
                     int[] arr = { 1, 2, 2, 3, 3, 3 };
                     Array.Sort(arr);
-                    byte nums = 1;
-                    for (int i = arr.Length - 2; i >= 0; i--)
+                    int nums = 1; //assign value to nums
+                    for (int i = arr.Length - 2; i >= 0; i--) //start for loop 
                     {
                         if (arr[i] == arr[i + 1])
                         {
@@ -130,7 +132,7 @@ namespace Assignment_2
                         {
                             nums = 1;
                         }
-                        if (arr[i] == nums && (i == 0 || arr[i - 1] != arr[i])) Console.WriteLine(arr[i]);
+                        if (arr[i] == nums && (i == 0 || arr[i - 1] != arr[i])) Console.WriteLine(arr[i]); 
 
                     }
                     return 0;
@@ -166,32 +168,34 @@ namespace Assignment_2
             {
                 try
                 {
+                    //create variables
                     string secret = "1123";
                     string guess = "0111";
                     int bulls = 0;
                     int cows = 0;
 
+                    //create variable x and y and assign a 
                     int[] x = new int[10];
                     int[] y = new int[10];
 
-                    for (int i = 0; i < secret.Length; i++)
+                    for (int i = 0; i < secret.Length; i++) // start the for loop using secret
                     {
-                        if (secret[i] == guess[i])
+                        if (secret[i] == guess[i]) 
                             bulls++;
                         else
                         {
-                            x[secret[i] - '0']++;
+                            x[secret[i] - '0']++; //assign x and y variable to secret and guess
                             y[guess[i] - '0']++;
                         }
                     }
 
-                    for (int i = 0; i < x.Length; i++)
+                    for (int i = 0; i < x.Length; i++) 
                     {
-                        cows += Math.Min(x[i], y[i]);
+                        cows += Math.Min(x[i], y[i]); //This for loop is used to obtain the lowest number
                     }
 
 
-                    string result = bulls.ToString() + "A" + cows.ToString() + "B";
+                    string result = bulls.ToString() + "A" + cows.ToString() + "B"; //the result is equal both strings together and "A" and "B" in between the two variables
                     Console.WriteLine(result);
                     return "";
                 }
@@ -220,9 +224,33 @@ namespace Assignment_2
             {
                 try
                 {
-                    //write your code here.
+                    //create the variables 
+                    string s = "ababcbacadefegdehijhklij";
+                    int[] parts = new int[26];
+                    for (int i = 0; i < s.Length; i++) // start of the for loop and int i
+                    {
+                        parts[s[i] - 'a'] = i;
+                    }
 
-                    return new List<int>() { };
+                    IList<int> res = new List<int>(); //use the List<int> function
+
+                    int start = 0; // define start int
+
+                    while (start < s.Length) // while loop start using start int and s string
+                    {
+                        int last = parts[s[start] - 'a']; // define last int using int parts and int start
+
+                        int idx = start; // defining int idx 
+                        while (idx <= last)
+                        {
+                            last = Math.Max(last, parts[s[idx++] - 'a']); //using the max function to obtain largest value
+                        }
+
+                        res.Add(last - start + 1); //adding last and start
+                        start = last + 1;
+                    }
+
+                    return res; //returning res
                 }
                 catch (Exception)
                 {
@@ -260,9 +288,31 @@ namespace Assignment_2
             {
                 try
                 {
-                    //write your code here.
+                    // create the variables
+                    int[] widths = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+                    string s = "abcdefghijklmnopqrstuvwxyz";
+                    Int32 row = 1;
+                    Int32 sum = 0;
+                    Int32 temp = 0; 
 
-                    return new List<int>() { };
+                    Char[] c = s.ToCharArray(); //create char c and convert string s tochararray
+                    foreach (Char _c in c) // start of loop using char c
+                    {
+                        temp = widths[_c - 97]; 
+                        if (sum + temp > 100) //if else loop for both outcomes
+                        {
+                            row++;
+                            sum = temp;
+                        }
+                        else
+                        {
+                            sum += temp;
+                        }
+                    }
+
+                    return new int[2] { row, sum }; //return both integers as a new int
+
+
                 }
                 catch (Exception)
                 {
@@ -336,7 +386,30 @@ namespace Assignment_2
             {
                 try
                 {
-                    //write your code here.
+                    //create the variables
+                    string[] words = { "gin", "zen", "gig", "msg" };
+                    string[] morse = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." };
+
+                    //use hash set for storing unique values
+                    var dic = new HashSet<string>();
+
+                    foreach (var word in words) //start of loops
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        foreach (var letter in word)
+                        {
+                            // Convert the character to morse and generate the string
+                            sb.Append(morse[(int)letter - 97]);
+                        }
+
+                        //Check if already contains
+                        if (!dic.Contains(sb.ToString()))
+                        {
+                            dic.Add(sb.ToString());
+                        }
+                    }
+                    //return the Count of uniquely inserted elements
+                    return dic.Count;
 
                     return 0;
                 }
